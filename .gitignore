@@ -1,0 +1,11 @@
+
+# convenience symbolic links
+llux
+
+# macOS workspace noise
+.DS_Store
+**/.DS_Store
+
+# internal launch notes and raw handovers
+private.notes/
+#
