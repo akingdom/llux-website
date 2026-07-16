@@ -43,6 +43,20 @@ Contributions are welcome from people working in different languages, regions, d
 
 ---
 
+## New Contribution Areas
+
+As Llux expands to become a universal bridge, we welcome contributions in the following new areas:
+
+- **Writing Recipes** — Pre‑built engine integrations (e.g., MQTT, SQLite, Modbus, WebSocket) that the AI can suggest and apply via `llux apply`.
+- **Improving AI Detection** — Help train or refine the pattern detectors used by `llux diagnose` and `llux suggest`.
+- **Building Importers** — Write plugins that translate foreign UI formats (SwiftUI, React, XAML, HTML) into Llux AST.
+- **Building Exporters** — Write plugins that translate Llux AST to other formats (React, SwiftUI, Qt/QML, static HTML).
+- **Domain‑Specific Mock Data** — Provide rich, realistic mock data generators for different industries (healthcare, industrial, smart home, VFX).
+
+If you are working in a domain not yet represented (e.g., aviation, maritime, scientific instrumentation), your feedback and contributions are especially valuable.
+
+---
+
 ## Contribution Process
 
 1. **Fork** the repository
