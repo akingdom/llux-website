@@ -77,6 +77,34 @@ Each layer is a distinct entry point for different personas (designers, product 
 
 ---
 
+## AI as a Transition Compass
+
+Llux is designed for creative exploration. The AI does not write your app for you — it watches, learns, and guides you so your prototype never becomes a dead-end.
+
+The CLI provides a set of AI‑assisted commands that act as a **Transition Compass**:
+
+| Command | What it does |
+| :--- | :--- |
+| `llux diagnose` | Scans your `.llux.md` and `.llux` files, detects patterns, and flags potential scaling issues. |
+| `llux suggest` | Lists available recipes based on the diagnosis. |
+| `llux apply <recipe>` | Applies the selected recipe (with a dry-run preview). |
+| `llux explain <recipe>` | Generates a plain‑language explanation of the recipe, why it matters, and what it changes. |
+| `llux watch` | Runs the AI Observer continuously in the background, offering suggestions as you work. |
+
+### How the AI Helps Across Domains
+
+| Domain | AI Role |
+| :--- | :--- |
+| **Creative / Solo Artist** | Generates rich mock data, suggests layout patterns, offers pre-built engine integrations (MQTT, SQLite, etc.). |
+| **Enterprise / Team** | Detects contract drift, suggests performance throttling, generates developer handoff packages. |
+| **Safety‑Critical** | Acts as a safety auditor — flags overlapping touch targets, validates constraints, enforces strict typing. |
+
+The AI is not a black box. Every suggestion is accompanied by an explanation, and every recipe can be reviewed before it is applied.
+
+(Aside: integration with AI of your choice is the ideal intent.)
+
+---
+
 ## Related
 
 - **Governance (12 Directives):** [`../community.who/governance.md`](../community.who/governance.md)
