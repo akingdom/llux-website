@@ -1,31 +1,29 @@
 # Quick Start
 
-**Status:** Pre-release. The core toolchain is under active development; the public quick-start flow is still being stabilised.
+**Status:** Pre-release. The core toolchain is under active development; the quick-start flow is being stabilised.
 
-## Build the Tool
+Llux is a designer-first tool. You can start building the interface immediately, without waiting for a developer. The compiler guides you toward a production-ready contract when you're ready to scale.
 
-The intended source build flow is:
+---
 
-```bash
-cd llux
-./scripts/build.sh
-```
-
-The build should produce a local `llux` binary.
-
-## Try an Example
-
-The first public example should use the current language direction: `bind`, `action`, and `view RootView`.
-
-## Intended Workflow
+## Designer First Steps (No Developer Required)
 
 ```bash
-llux new my-app
+# Create a new project with mock data pre-configured
+llux new my-app --with-mock
 cd my-app
-llux build
-llux run
-```
 
-The intended entrypoint is `start.llux`, and the intended root view name is `RootView`.
+# Edit the surface (app.llux.md) — layout, styling, and bindings
+# Edit the logic (app.llux) — state, actions, and contracts
 
-The command names are the public direction.
+# Preview your work with live mock data
+llux preview
+
+# Let the AI scan your work and suggest improvements or recipes
+llux suggest
+
+# When you're ready to formalise the interface, extract the contract
+llux extract
+
+# Generate a developer handoff package (contract + C header + plain-language brief)
+llux prepare --for=team
