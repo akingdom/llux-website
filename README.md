@@ -10,6 +10,8 @@ Second Paragraph (The Universal Model):
 
 Every interactive system—whether a smart-home dashboard, a CNC machine HMI, a VFX render farm monitor, or a museum art installation—follows the same pattern: Surface ↔ Transit ↔ Engine. Llux compiles the Surface and the Transit rules. You bring the Engine.
 
+A general aim is in part a standard language which can work easily with AI assistants, and yet-to-be-announced design tools.
+
 ---
 
 ## Current Project
@@ -40,6 +42,8 @@ Every interactive system—whether a smart-home dashboard, a CNC machine HMI, a 
 ---
 
 ## Current Scope
+
+> As Llux is *in early development*, the present focus is on building the central technical supports needed for upcoming design matters.
 
 The core toolchain currently exposes a `llux` CLI and a C-based compiler layout. Basic examples, keyword and localisation docs, and build scripts exist in the implementation workspace.
 
