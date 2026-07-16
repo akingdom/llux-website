@@ -29,15 +29,38 @@ The default is `dump` because it validates the full parser, code generation, and
 
 ## Build Targets
 
+| Target | Mode | Purpose | Dependencies |
+| :--- | :--- | :--- | :--- |
+| `native-binary` | Default | OS-level execution (`.so`/`.dylib`/`.dll` + `.h`) | TCC/GCC/Clang |
+| `html-static` | Export | Documentation, design review, PDF generation | None |
+| `html-dynamic` | Export | Interactive prototypes, user testing | None (self-contained JS) |
+| `react` | Export | React component library | Planned |
+| `swiftui` | Export | SwiftUI source | Planned |
+| `qt-qml` | Export | Qt/QML source | Planned |
+| `embedded-firmware` | Export | Bare-metal microcontroller targets | Planned |
+
+The default target is `native-binary`. HTML exports are optional — they exist for documentation, prototyping, and sharing, not as the primary runtime.
+
+## Integration Targets under consideration
+
 | Target | Purpose | Status |
 | :--- | :--- | :--- |
 | `core-wasm` | Portable logic/runtime. | Planned |
 | `browser-js` | Browser shell. | Planned |
 | `tauri-desktop` | Desktop shell. | Planned |
 | `python-service` | Backend/service integration. | Planned |
-| `native-binary` | OS-level execution. | Planned after Phase 0 stabilisation |
-| `embedded-firmware` | Microcontroller or embedded deployment. | Planned |
 | `static-asset` | Layout-only output. | Planned |
+
+## Import / Export Architecture
+
+The compiler uses a canonical AST as its intermediate representation. Importers translate foreign source formats into this AST; exporters translate the AST into target formats.
+
+| Direction | Formats | Status |
+| :--- | :--- | :--- |
+| Import | SwiftUI, React/JSX, HTML, Qt/QML, XAML | Planned |
+| Export | Native (C), html-static, html-dynamic, React, SwiftUI, Qt/QML | Planned |
+
+The import/export system is designed to be **pluggable** — new formats can be added without modifying the core compiler. This keeps the core lean, offline, and dependency-free while enabling broad ecosystem compatibility.
 
 ## Runtime Direction
 
