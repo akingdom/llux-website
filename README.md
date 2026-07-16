@@ -3,6 +3,18 @@
 **Domain:** [llux.org](https://llux.org)  
 **Status:** Pre-release documentation
 
+Llux is a designer-first UI/UX intent compiler.
+
+It turns interface descriptions into a stable binary bridge (.so/.dylib/.dll) that renders the UI and transits actions out (user interactions) and state in (real-world data).
+
+Developers integrate the binary to handle business logic. Designers own the interface. The bridge never breaks.
+
+Second Paragraph (The Universal Model):
+
+Every interactive system—whether a smart-home dashboard, a CNC machine HMI, a VFX render farm monitor, or a museum art installation—follows the same pattern: Surface ↔ Transit ↔ Engine. Llux compiles the Surface and the Transit rules. You bring the Engine.
+
+---
+
 Llux is a UI-to-binary language and toolchain for describing interfaces in plain, explicit source and compiling them into local software. It is being designed from the recurring pain points and strengths of existing UI systems: declarative UI, native toolkits, browser-based front ends, low-level portability, documentation formats, and multilingual developer workflows.
 
 It is designed for designers, built for developers, and structured so AI systems can read, transform, explain, and generate it reliably.
@@ -12,6 +24,8 @@ It is designed for designers, built for developers, and structured so AI systems
 The aim is not to replace one framework with another layer of ceremony. Llux is intended to make interface logic, layout intent, build output, and error feedback legible enough that more people can participate in software creation without giving up the control expected by experienced engineers.
 
 This repository is the public documentation and website workspace for Llux. It is being organised to the standard expected of a serious programming-language project: clear first steps, accurate references, explicit status labels, and a credible path from first example to production-quality work.
+
+[[Llux illustration](media/llux-bg-8c6a08a3c58b.png)](media/llux-bg-8c6a08a3c58b.png)
 
 ---
 
