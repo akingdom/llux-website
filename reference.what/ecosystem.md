@@ -17,71 +17,50 @@ Before we draw the diagram, let's identify the primitives. These are the **atomi
 
 ---
 
-## High‑Level Relational Diagram
+## High‑Level Relational Diagram (Surface ↔ Transit ↔ Engine)
+
+Every interactive system—whether a smart-home dashboard, an industrial HMI, a VFX render farm monitor, or a museum installation—follows the same pattern.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                                                             │
-│                          ┌─────────────────────┐                           │
-│                          │      WRITER         │                           │
-│                          │  (Designer, Dev,    │                           │
-│                          │   Product Manager,  │                           │
-│                          │   Domain Expert)    │                           │
-│                          └──────────┬──────────┘                           │
-│                                     │                                       │
-│                                     │ Describes Intent                     │
-│                                     ▼                                       │
-│                          ┌─────────────────────┐                           │
-│                          │      INTENT         │                           │
-│                          │  Natural Language   │                           │
-│                          │  Relational Rules   │                           │
-│                          │  Contextual Hints   │                           │
-│                          └──────────┬──────────┘                           │
-│                                     │                                       │
-│                                     │ Asks for Resolution                  │
-│                                     ▼                                       │
-│                          ┌─────────────────────┐                           │
-│                          │     RESOLVER        │                           │
-│                          │  (The Patchbay)     │                           │
-│                          └──────────┬──────────┘                           │
-│                                     │                                       │
-│             ┌───────────────────────┼───────────────────────┐              │
-│             │                       │                       │              │
-│             ▼                       ▼                       ▼              │
-│   ┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐        │
-│   │    REGISTRY     │   │    SERVICES     │   │   LEARNING      │        │
-│   │ Intent → Impl.  │   │  (API, DB,      │   │  Preferences    │        │
-│   │ Mappings        │   │   Logging)      │   │  Patterns       │        │
-│   └─────────────────┘   └─────────────────┘   └─────────────────┘        │
-│             │                       │                       │              │
-│             └───────────────────────┼───────────────────────┘              │
-│                                     │                                       │
-│                                     │ Generates Explicit Specification    │
-│                                     ▼                                       │
-│                          ┌─────────────────────┐                           │
-│                          │  IMPLEMENTATION     │                           │
-│                          │  (.llux + .llux.md) │                           │
-│                          │  Explicit Syntax    │                           │
-│                          └──────────┬──────────┘                           │
-│                                     │                                       │
-│                                     │ Passes to Compiler                  │
-│                                     ▼                                       │
-│                          ┌─────────────────────┐                           │
-│                          │     COMPILER        │                           │
-│                          │  (Lexer → Parser    │                           │
-│                          │   → AST → Codegen)  │                           │
-│                          └──────────┬──────────┘                           │
-│                                     │                                       │
-│                                     │ Produces Binary                     │
-│                                     ▼                                       │
-│                          ┌─────────────────────┐                           │
-│                          │     BINARY          │                           │
-│                          │  (Executable,       │                           │
-│                          │   WASM, Library)    │                           │
-│                          └─────────────────────┘                           │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                        SURFACE (Designer)                           │   │
+│   │   .llux.md — Layout, styling, animations, accessibility             │   │
+│   │   Binds to state and actions via `@` references                     │   │
+│   └───────────────────────────────┬─────────────────────────────────────┘   │
+│                                   │                                         │
+│                                   │ Transit Contract (.llux)                │
+│                                   │ Defines: State (In) & Actions (Out)     │
+│                                   ▼                                         │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                      LLUX BINARY (Compiler)                         │   │
+│   │   .so / .dylib / .dll + .h header                                   │   │
+│   │   Renders the Surface. Dispatches Actions out.                      │   │
+│   │   Accepts State updates in.                                         │   │
+│   └───────────────────────────────┬─────────────────────────────────────┘   │
+│                                   │                                         │
+│                                   │ C API (ui_action_dispatch, ui_state_set)│
+│                                   ▼                                         │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                        ENGINE (Developer)                           │   │
+│   │   Business logic, APIs, databases, hardware drivers, PLCs           │   │
+│   │   Receives Actions. Emits State.                                    │   │
+│   └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### The Workflow in Three Steps
+
+| Step | Who | Artifact |
+| :--- | :--- | :--- |
+| 1. Build the Surface | Designer | `.llux.md` (intent + layout) |
+| 2. Define the Transit | Compiler (or Designer) | `.llux` (state + actions) |
+| 3. Implement the Engine | Developer | Business logic (C/C++/Rust/Zig) |
+
+The Llux binary bridges the Surface and the Engine. The developer never touches the Surface; the designer never touches the Engine.
+
 
 ---
 
@@ -91,26 +70,26 @@ Intent exists at three levels, each feeding into the next:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  LAYER 1: USER INTENT                                                     │
-│  What the user wants to achieve.                                          │
-│                                                                           │
-│  "I want a counter app. The user clicks a button and the number goes up." │
+│  LAYER 1: USER INTENT                                                       │
+│  What the user wants to achieve.                                            │
+│                                                                             │
+│  "I want a counter app. The user clicks a button and the number goes up."   │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  LAYER 2: DESIGN INTENT                                                   │
-│  What the designer wants the UI to look like.                             │
-│                                                                           │
-│  "The counter is in the center. The button is below it and is blue."      │
+│  LAYER 2: DESIGN INTENT                                                     │
+│  What the designer wants the UI to look like.                               │
+│                                                                             │
+│  "The counter is in the center. The button is below it and is blue."        │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  LAYER 3: IMPLEMENTATION INTENT                                           │
-│  What the developer wants the system to do.                               │
-│                                                                           │
-│  "The counter is state. The button triggers an action. The state updates."│
+│  LAYER 3: IMPLEMENTATION INTENT                                             │
+│  What the developer wants the system to do.                                 │
+│                                                                             │
+│  "The counter is state. The button triggers an action. The state updates."  │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -146,30 +125,30 @@ Intent exists at three levels, each feeding into the next:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  USER EXPERIENCE                                                          │
-│  What the user sees and interacts with.                                   │
-│  (Binary output)                                                          │
+│  USER EXPERIENCE                                                            │
+│  What the user sees and interacts with.                                     │
+│  (Binary output)                                                            │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       ▲
                                       │
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  IMPLEMENTATION LAYER                                                     │
-│  Explicit code, explicit syntax, explicit references.                     │
-│  (.llux, .llux.md with explicit syntax)                                   │
+│  IMPLEMENTATION LAYER                                                       │
+│  Explicit code, explicit syntax, explicit references.                       │
+│  (.llux, .llux.md with explicit syntax)                                     │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       ▲
                                       │
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  RESOLUTION LAYER                                                        │
-│  Intent → Implementation mappings.                                       │
-│  (Resolver, Registry, Services, Learning)                                │
+│  RESOLUTION LAYER                                                           │
+│  Intent → Implementation mappings.                                          │
+│  (Resolver, Registry, Services, Learning)                                   │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       ▲
                                       │
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  INTENT LAYER                                                            │
-│  What the writer wants to achieve.                                       │
-│  (Natural language, descriptive, relational)                             │
+│  INTENT LAYER                                                               │
+│  What the writer wants to achieve.                                          │
+│  (Natural language, descriptive, relational)                                │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -181,27 +160,27 @@ Intent exists at three levels, each feeding into the next:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  .llux.md (Intent + Layout + Semantics)                                  │
-│  - Natural language intent                                               │
-│  - `:::` layout containers                                               │
-│  - Semantic roles and metadata                                           │
-│  - `@` references to logic                                               │
+│  .llux.md (Intent + Layout + Semantics)                                     │
+│  - Natural language intent                                                  │
+│  - `:::` layout containers                                                  │
+│  - Semantic roles and metadata                                              │
+│  - `@` references to logic                                                  │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  .llux (Logic + State + Actions)                                        │
-│  - `state`, `action`, `bind`                                            │
-│  - `view` with explicit components                                       │
-│  - Services and capabilities                                            │
+│  .llux (Logic + State + Actions)                                            │
+│  - `state`, `action`, `bind`                                                │
+│  - `view` with explicit components                                          │
+│  - Services and capabilities                                                │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  Resolver generates .llux from .llux.md                                 │
-│  - Reads intent from .llux.md                                           │
-│  - Queries registry                                                     │
-│  - Generates explicit .llux code                                        │
+│  Resolver generates .llux from .llux.md                                     │
+│  - Reads intent from .llux.md                                               │
+│  - Queries registry                                                         │
+│  - Generates explicit .llux code                                            │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -212,29 +191,29 @@ Intent exists at three levels, each feeding into the next:
 ## The Registry: A Closer Look
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────────────────┐
 │  REGISTRY                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Component Registry                                                │  │
-│  │  - Panel, Label, Button, Flex, Grid, Page, Card...               │  │
-│  │  - Each with: purpose, properties, behaviour, variants             │  │
+│  │  Component Registry                                                 │  │
+│  │  - Panel, Label, Button, Flex, Grid, Page, Card...                  │  │
+│  │  - Each with: purpose, properties, behaviour, variants              │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Service Registry                                                  │  │
-│  │  - API, Persistence, Logging, Auth...                             │  │
-│  │  - Each with: purpose, interface, available methods               │  │
+│  │  Service Registry                                                   │  │
+│  │  - API, Persistence, Logging, Auth...                               │  │
+│  │  - Each with: purpose, interface, available methods                 │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Pattern Registry                                                  │  │
-│  │  - Common UI patterns: login form, search bar, dashboard...       │  │
-│  │  - Each with: structure, behaviour, usage examples                 │  │
+│  │  Pattern Registry                                                   │  │
+│  │  - Common UI patterns: login form, search bar, dashboard...         │  │
+│  │  - Each with: structure, behaviour, usage examples                  │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Design Token Registry                                             │  │
-│  │  - Colors, fonts, spacing, radius, elevation...                   │  │
-│  │  - Each with: values, relationships, semantics                    │  │
+│  │  Design Token Registry                                              │  │
+│  │  - Colors, fonts, spacing, radius, elevation...                     │  │
+│  │  - Each with: values, relationships, semantics                      │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 **The registry is the "knowledge base" of the system.** The resolver queries it to translate intent to implementation.
@@ -244,34 +223,34 @@ Intent exists at three levels, each feeding into the next:
 ## The Resolver (Patchbay) in Detail
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────────────────┐
 │  RESOLVER (The Patchbay)                                                  │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Intent Parser                                                     │  │
-│  │  - Reads natural language intent                                   │  │
-│  │  - Extracts: what, where, how, constraints                        │  │
+│  │  Intent Parser                                                      │  │
+│  │  - Reads natural language intent                                    │  │
+│  │  - Extracts: what, where, how, constraints                          │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
-│                                      │                                      │
-│                                      ▼                                      │
+│                                      │                                    │
+│                                      ▼                                    │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Match Engine                                                      │  │
-│  │  - Queries registry for matching components/services              │  │
-│  │  - Uses: synonyms, context, priorities, preferences               │  │
+│  │  Match Engine                                                       │  │
+│  │  - Queries registry for matching components/services                │  │
+│  │  - Uses: synonyms, context, priorities, preferences                 │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
-│                                      │                                      │
-│                                      ▼                                      │
+│                                      │                                    │
+│                                      ▼                                    │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Ambiguity Handler                                                 │  │
-│  │  - If multiple matches, suggests alternatives                      │  │
-│  │  - If no matches, suggests closest                                 │  │
+│  │  Ambiguity Handler                                                  │  │
+│  │  - If multiple matches, suggests alternatives                       │  │
+│  │  - If no matches, suggests closest                                  │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
-│                                      │                                      │
-│                                      ▼                                      │
+│                                      │                                    │
+│                                      ▼                                    │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │  Code Generator                                                    │  │
-│  │  - Produces explicit .llux from resolved intent                   │  │
+│  │  Code Generator                                                     │  │
+│  │  - Produces explicit .llux from resolved intent                     │  │
 │  └─────────────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 **The Resolver is not a compiler.** It is a **translation engine** that converts intent into explicit syntax.
@@ -335,6 +314,35 @@ Intent exists at three levels, each feeding into the next:
                            │  Executable     │
                            └─────────────────┘
 ```
+
+---
+
+### Importers & Exporters (The Extensibility Layer)
+
+The compiler is built around a canonical AST. Importers translate foreign source formats into this AST; exporters translate the AST into target formats.
+
+```
+                    ┌─────────────────┐
+                    │  Llux AST       │
+                    │  (Canonical)    │
+                    └────────┬────────┘
+                             │
+           ┌─────────────────┼─────────────────┐
+           │                 │                 │
+           ▼                 ▼                 ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│   IMPORTERS     │ │   EXPORTERS     │ │   COMPILER      │
+│ SwiftUI → AST   │ │ AST → Native    │ │  (Core)         │
+│ React → AST     │ │ AST → HTML      │ │                 │
+│ HTML → AST      │ │ AST → React     │ │                 │
+└─────────────────┘ └─────────────────┘ └─────────────────┘
+```
+
+**Importers** read foreign source formats and produce Llux source (`.llux.md`). This enables translation from existing UI codebases into Llux.
+
+**Exporters** read Llux source and produce target formats. The default exporter produces a native binary. Optional exporters produce static HTML (zero JavaScript), dynamic HTML (self-contained interactive prototype), or framework-specific output.
+
+**The core compiler does not depend on any importer or exporter.** They are optional plugins. This keeps the toolchain offline-first and dependency-free while enabling broad interoperability.
 
 ---
 
