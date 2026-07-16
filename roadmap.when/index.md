@@ -61,6 +61,25 @@ The active public direction is:
 | **Additional UI engines** | Add `tty`, `nuklear`, and `json` after `dump` is stable. |
 | **Localisation** | Expand keyword maps, locale files, and translated diagnostics. |
 
+## AI & Extensibility (Active Direction)
+
+The following features are planned to complete the Transition Compass and universal bridge model:
+
+| Feature | Description | Status |
+| :--- | :--- | :--- |
+| `llux suggest` | AI-driven pattern detection and recipe suggestions | Planning |
+| `llux extract` | Extract a formal contract from a surface | Planning |
+| `llux prepare --for=team` | Generate developer handoff package | Planning |
+| `llux apply <recipe>` | Apply pre‑built engine integrations (MQTT, SQLite, etc.) | Planning |
+| `--target=html-static` | Zero‑JavaScript HTML export | Planning |
+| `--target=html-dynamic` | Self‑contained interactive HTML prototype | Planning |
+| Importer: SwiftUI | Translate SwiftUI source to `.llux.md` | Research |
+| Importer: React | Translate React/JSX to `.llux.md` | Research |
+| Exporter: React | Export Llux AST to React components | Research |
+| Exporter: SwiftUI | Export Llux AST to SwiftUI source | Research |
+
+The core compiler (lexer → parser → AST → C codegen) is already stable for basic programs. The work ahead is additive — building the AI layer and the import/export system without changing the existing foundation.
+
 ## Success Measures
 
 | Measure | Target |
