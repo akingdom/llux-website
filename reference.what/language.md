@@ -12,6 +12,44 @@ This page describes the active Llux language direction. Older drafts used `compu
 4. **One language everywhere.** `.llux` carries implementation; `.llux.md` can reference Llux expressions with `@`.
 5. **Kind errors.** Errors should identify the root cause, location, and likely fix.
 
+## The Transit Contract (Surface ↔ Engine)
+
+Every Llux project defines a bi-directional bridge between the **Surface** (the UI) and the **Engine** (the business logic or real world).
+
+| Direction | What it does | Defined in |
+| :--- | :--- | :--- |
+| **Out** (Surface → Engine) | User actions (clicks, inputs, gestures) | `action` definitions |
+| **In** (Engine → Surface) | State updates, data, real-time metrics | `state` definitions |
+
+The `.llux` file is the **formal contract** for this transit. The compiler uses it to generate:
+
+- A C header (`.h`) for the developer to implement the Engine
+- A binary module (`.so`/`.dylib`/`.dll`) that renders the Surface and dispatches Actions
+
+The contract is the **single source of truth** between designer and developer.
+
+### Mock Data for Design Exploration
+
+Designers can preview the Surface without an Engine using the `@mock` prefix:
+
+```markdown
+::: Label { text: "User: " + @mock.user.name }
+::: Button { action: "AddToCart" }
+```
+
+The `@mock` prefix tells the compiler: "generate fake data for this binding." The preview runs with rich, domain-appropriate mock data so the designer can iterate freely.
+
+### Extracting a Contract from a Surface
+
+When a designer has built a complete Surface using `@mock` data and inline action names, the compiler can extract the formal contract:
+
+```bash
+llux extract --from=surface.llux.md --to=contract.llux
+```
+
+The extracted contract contains all referenced state fields and actions, ready for the developer to implement.
+```
+
 ## File Types
 
 | Extension | Purpose |
