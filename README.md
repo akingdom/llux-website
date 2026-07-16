@@ -1,11 +1,5 @@
 [![Llux illustration](media/llux-bg-8c6a08a3c58b.png)](media/llux-bg-8c6a08a3c58b.png)
 
-# Llux
-
-**Domain:** [llux.org](https://llux.org)  
-**Status:** Pre-release documentation
-**Llux Status:** (approx) early-to-mid alpha
-
 Llux is a designer-first UI/UX intent compiler.
 
 It turns interface descriptions into a stable binary bridge (.so/.dylib/.dll) that renders the UI and transits actions out (user interactions) and state in (real-world data).
@@ -18,7 +12,11 @@ Every interactive system—whether a smart-home dashboard, a CNC machine HMI, a 
 
 ---
 
-## Current Project Shape
+## Current Project
+
+**Status:** Pre-release documentation + pre-release early-to-mid alpha
+
+**Documentation:** [llux.org](https://llux.org) 
 
 | Path | Purpose |
 | :--- | :--- |
