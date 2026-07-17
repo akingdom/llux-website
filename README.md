@@ -18,6 +18,10 @@ Every interactive system—whether a smart-home dashboard, a CNC machine HMI, or
 
 **Status:** Pre-release documentation + pre-release early-to-mid alpha
 
+**Project:** The public project name is **Llux**.
+
+**Targets:** The first stabilisation target is a local compiler pipeline with the zero-dependency `dump` UI engine. Translators for SwiftUI, Qt/QML, HTML, React, and other UI systems are planned work, not yet shipped functionality.
+
 **Documentation:** [llux.org](https://llux.org) 
 
 | Path | Purpose |
@@ -82,11 +86,6 @@ action Increment(amount: int = 1) {
 - `<->` = bi‑directional sync (state ↔ UI)
 - `->` = outbound stream / action (UI → state)
 - `=` = static configuration (not live)
-
-
-The first stabilisation target is a local compiler pipeline with the zero-dependency `dump` UI engine. Translators for SwiftUI, Qt/QML, HTML, React, and other UI systems are planned work, not yet shipped functionality.
-
-The public project name is **Llux**.
 
 ---
 
