@@ -27,6 +27,15 @@ The generated code should call an abstract `ui_*` interface. The selected UI eng
 
 The default is `dump` because it validates the full parser, code generation, and build pipeline without adding graphical dependencies.
 
+### Dataflow Syntax (Summary)
+
+| Operator | Purpose | Example |
+| :--- | :--- | :--- |
+| `=` | Static configuration | `min=0` |
+| `<-` | Inbound stream (state → UI) | `@text <- app.count` |
+| `<->` | Bi‑directional sync | `@value <-> app.search_query` |
+| `->` | Outbound stream (UI → state) | `@press -> app.increment` |
+
 ## Build Targets
 
 | Target | Mode | Purpose | Dependencies |
