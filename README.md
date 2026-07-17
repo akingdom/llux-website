@@ -1,16 +1,16 @@
 [![Llux illustration](media/llux-bg-8c6a08a3c58b.png)](media/llux-bg-8c6a08a3c58b.png)
 
-Llux is a designer-first UI/UX intent compiler.
+Llux is a tool for independent creators.
 
-It turns interface descriptions into a stable binary bridge (.so/.dylib/.dll) that renders the UI and transits actions out (user interactions) and state in (real-world data).
+It turns your interface ideas into native software that runs anywhere—without platform lock-in, hidden dependencies, or surprises.
 
-Developers integrate the binary to handle business logic. Designers own the interface. The bridge never breaks.
+You describe the intent. Llux compiles it to a binary. You own it.
 
-Second Paragraph (The Universal Model):
+---
 
-Every interactive system—whether a smart-home dashboard, a CNC machine HMI, a VFX render farm monitor, or a museum art installation—follows the same pattern: Surface ↔ Transit ↔ Engine. Llux compiles the Surface and the Transit rules. You bring the Engine.
+Every interactive system—whether a smart-home dashboard, a CNC machine HMI, or a museum installation—follows the same pattern: **Surface ↔ Transit ↔ Engine**. Llux compiles the Surface and the Transit rules. You bring the Engine.
 
-A general aim is in part a standard language which can work easily with AI assistants, and yet-to-be-announced design tools.
+**No platform lock-in. No hidden dependencies. No surprises.**
 
 ---
 
@@ -78,6 +78,7 @@ The public project name is **Llux**.
 
 Llux should be of interest to:
 
+- Independent creators, entrepreneurs, and solo founders who want to build software that runs anywhere, without being tied to a single platform or ecosystem.
 - UI engineers who like declarative systems but want clearer build artefacts and fewer runtime assumptions.
 - Native and embedded developers who want interface code without a browser stack.
 - SwiftUI, Qt/QML, GTK, React, and HTML practitioners interested in translation paths between UI descriptions.
