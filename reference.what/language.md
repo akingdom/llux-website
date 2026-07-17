@@ -60,6 +60,87 @@ No construct is overloaded. Every symbol has one job.
 
 ---
 
+I will incorporate the frontmatter specification into the language reference, placing it after the File Types table and before the workflow stages, with the clear rule that **no properties are required** and everything is optional.
+
+---
+
+## Frontmatter (YAML)
+
+All Llux Markdown files (`.llux.md`, `.lmd`, `.intent.md`) MAY include a YAML frontmatter block at the top of the file, delimited by `---` lines.
+
+### Nothing Is Required
+
+No property is required. A file with no frontmatter is still valid.
+
+The `$schema` directive is optional. It exists to enable editor validation and autocompletion—not to enforce a rigid structure.
+
+### Recommended Properties
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `$schema` | string (URI) | Reference endpoint for machine-validation |
+| `title` | string | Human-readable name of the module/page |
+| `type` | string (enum) | `component`, `layout`, `view`, `guide`, `intent`, `contract`, `idea`, `note` |
+| `version` | string | Semantic versioning (`^[0-9]+\.[0-9]+\.[0-9]+$`) |
+| `author` | string | Creator of the document |
+| `created` | string (ISO 8601) | Creation timestamp |
+| `modified` | string (ISO 8601) | Last modification timestamp |
+| `status` | string (enum) | `draft`, `review`, `published`, `archived` |
+| `ai_optimized` | boolean | Defaults to `true` if omitted |
+
+### Additional Properties
+
+Any other properties are **permitted** and will not cause validation errors. Tools may use them for their own purposes.
+
+### Vendor Extensions
+
+Custom properties for distinct tooling environments SHOULD be prefixed with `x-` to prevent collisions with future core specification updates.
+
+```yaml
+x-llux-compiler:
+  target_architecture: "wasm32-unknown-unknown"
+```
+
+### Examples
+
+```yaml
+# Formal document
+---
+$schema: https://llux.org/frontmatter.schema.json
+title: "Button Component"
+type: "component"
+version: "1.0.0"
+author: "Your Name"
+status: "published"
+---
+```
+
+```yaml
+# Quick sketch (minimal)
+---
+title: "Counter App Idea"
+type: "idea"
+---
+```
+
+```yaml
+# No frontmatter at all (still valid)
+# Just Markdown content
+```
+
+### Canonical Schema
+
+The canonical JSON Schema for Llux frontmatter lives at:
+
+```
+https://llux.org/frontmatter.schema.json
+```
+
+It declares all recommended properties, allows additional properties, and requires none. Editors with YAML Language Server support can use this schema for validation and autocompletion when the `$schema` directive is present.
+```
+
+---
+
 ## Stage 1: Brainstorming (`*.intent.md`)
 
 Brainstorming files are **pure Markdown**. They contain no Llux-specific syntax. They are for:
