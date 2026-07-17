@@ -188,6 +188,28 @@ Intent exists at three levels, each feeding into the next:
 
 ---
 
+### Dataflow Syntax
+
+Llux uses a target‑driven dataflow model:
+
+```markdown
+# Static configuration (no @)
+::: Slider { min=0 max=100 }
+
+# Inbound: @key <- source
+::: Label { @text <- app.count }
+
+# Sync: @key <-> source
+::: Input { @value <-> app.search_query }
+
+# Outbound: @key -> target
+::: Button { @press -> app.increment }
+```
+
+**The rule:** `@` marks a **component property as live and reactive**. It belongs on the **target** (the component's property key), never on the source.
+
+---
+
 ## The Registry: A Closer Look
 
 ```
