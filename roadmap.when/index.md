@@ -20,6 +20,17 @@ The active public direction is:
 | **Component model** | One component folder with `component.toml` |
 | **Runtime direction** | Workspace with WCPS protocol |
 
+### Dataflow Direction (Settled)
+
+| Operator | Purpose | Status |
+| :--- | :--- | :--- |
+| `@key <- source` | Inbound stream | Settled |
+| `@key <-> source` | Bi‑directional sync | Settled |
+| `@key -> target` | Outbound stream | Settled |
+| `key=value` | Static configuration | Settled |
+
+`@` marks the component property as live and reactive. It belongs on the target.
+
 ## Phase 0 Focus
 
 ### Compiler and CLI
