@@ -50,23 +50,39 @@ The core toolchain currently exposes a `llux` CLI and a C-based compiler layout.
 The active language direction is:
 
 ```llux
+# Contract (app.llux)
 app state {
-    count = 0
+    count: int = 0
 }
 
-bind double = app.count * 2
-
-action Increment(amount = 1) {
+action Increment(amount: int = 1) {
     app.count += amount
 }
-
-view RootView {
-    Panel {
-        Label { text: "Count: " + app.count }
-        Button { label: "+1"; action: Increment(1) }
-    }
-}
 ```
+
+```markdown
+# Surface (app.llux.md)
+::: page
+  ::: flex gap-4
+    # Inbound: Label's @text pulls from app.count
+    ::: Label { @text <- "Count: " + app.count }
+    
+    # Sync: Slider's @value syncs with app.count
+    ::: Slider { @value <-> app.count min=0 max=100 }
+    
+    # Action: Button's @press pushes to app.increment
+    ::: Button { @press -> app.increment label="+1" }
+  :::
+:::
+```
+
+**Key:**
+- `@` on the **target** (component property) = live and reactive
+- `<-` = inbound stream (state → UI)
+- `<->` = bi‑directional sync (state ↔ UI)
+- `->` = outbound stream / action (UI → state)
+- `=` = static configuration (not live)
+
 
 The first stabilisation target is a local compiler pipeline with the zero-dependency `dump` UI engine. Translators for SwiftUI, Qt/QML, HTML, React, and other UI systems are planned work, not yet shipped functionality.
 
