@@ -48,6 +48,24 @@ The active public direction is:
 - [ ] Ensure runnable examples match the current parser.
 - [ ] Keep historical planning material separate from public launch pages.
 
+---
+
+## Creator-First Focus
+
+Independence and autonomy are not afterthoughts. They are the foundation.
+
+| Priority | Why It Matters |
+| :--- | :--- |
+| **Platform independence** | Creators must be able to run their software anywhere. |
+| **Offline-first** | Creators must not depend on the internet to build or run. |
+| **Zero dependencies** | Creators must not depend on others' code or services. |
+| **Native binary** | Creators must own their executable. |
+| **Plain source** | Creators must understand their own code. |
+
+Every feature is evaluated against these priorities. If it does not serve the creator's independence, it does not belong.
+
+---
+
 ## Next Planned Areas
 
 | Area | Purpose |
