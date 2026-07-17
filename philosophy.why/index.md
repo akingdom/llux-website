@@ -12,6 +12,20 @@ This is the mindset you should expect from every interaction with Llux — the c
 - **Kind errors:** Every error message teaches, supports, and offers a path forward. The compiler is a teacher, not a judge.
 - **Clear intention:** The code you write says what you mean. The compiler helps you say it clearly.
 
+### The Wirth Principle
+
+Llux follows Niklaus Wirth's principle that language constructs should have **single, clear meanings**.
+
+| Construct | Single Meaning |
+| :--- | :--- |
+| `@` | "This component property is live and reactive" |
+| `=` | "This is static configuration" |
+| `<-` | "Data flows from source to target" |
+| `<->` | "Data flows both ways" |
+| `->` | "Data flows from target to source" |
+
+No construct is overloaded. Every symbol has one job.
+
 ### Kind Errors
 
 Errors are not punishments. They are guidance.
