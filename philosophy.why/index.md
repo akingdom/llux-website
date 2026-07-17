@@ -135,6 +135,16 @@ The AI is not a black box. Every suggestion is accompanied by an explanation, an
 
 ---
 
+## Not Rebellion
+
+Llux is not about fighting platforms or ecosystems. It is about **choice**.
+
+We believe that creators should be able to choose the tools, platforms, and partners that work best for them. Llux does not replace or reject other tools—it enables you to work with them on your terms.
+
+Independence is not isolation. It is the freedom to collaborate without being trapped.
+
+---
+
 ## Related
 
 - **Governance (12 Directives):** [`../community.who/governance.md`](../community.who/governance.md)
