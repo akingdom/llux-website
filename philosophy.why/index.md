@@ -35,6 +35,36 @@ The language is designed to reduce unnecessary symbolic overhead. Keywords can m
 
 ---
 
+## Independence and Autonomy
+
+Llux is built on the principle that creators should be free to build what they want, where they want, without asking permission.
+
+This is not about rebellion. It is about **autonomy**: the ability to make your own choices.
+
+### What Independence Means in Llux
+
+| Aspect | What It Means |
+| :--- | :--- |
+| **Platform independence** | Your software runs on any platform—desktop, embedded, server, or web. |
+| **Offline-first** | You do not need the internet to build or run your software. |
+| **Zero dependencies** | Your software does not depend on others' code or services. |
+| **Native binary** | Your software is an executable you own and control. |
+| **Plain source** | Your code is readable, understandable, and yours. |
+
+### What Autonomy Means for Creators
+
+- **You choose your tools.** Llux does not lock you into a specific IDE, editor, or workflow.
+- **You choose your partners.** Llux enables collaboration but does not require it.
+- **You choose your future.** Llux does not force you into a single path.
+
+### Independence is Not Isolation
+
+Llux is built for collaboration—not solitude. The independence it provides is the freedom to work with anyone, on any platform, without being trapped.
+
+Independence means you are free to choose your partners, not that you have to work alone.
+
+---
+
 ## Design Philosophy (For Language Designers & The Inquisitive)
 
 This section covers the theoretical underpinnings and high-level architectural choices.
